@@ -1,11 +1,18 @@
-const express = require('express');
-const cors = require('cors');
+require('dotenv').config(); 
 
+
+const express = require('express');
+const postRoutes = require('./routes/postRoutes');
+
+const connectDB = require('./config/db');
+connectDB();
 const app = express();
+
 const port = 5000;
 
-app.use(cors())
-app.use(express.json());
+app.use(express.json()); 
+
+app.use('/api/posts/', postRoutes);
 
 app.get('/', (req , res) => {
     res.json({message:"Working request"})
